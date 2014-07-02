@@ -294,9 +294,6 @@ function the_view(){
 		setPostViews(get_the_ID());
 	}
 }
-
-
-
 // 文章存档函数
  function Rcloud_archives_list() {
      if( !$output = get_option('Rcloud_archives_list') ){
@@ -413,6 +410,101 @@ function article_index($content) {
   return $content;
 }
 add_filter( 'the_content', 'article_index' );
+//pinginbaidu
+function bdping($post_id) {
+    $baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
+    $wp_http_obj = new WP_Http();
+    $return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
+    if(isset($return['body'])){
+        if(strstr($return['body'], '0')){
+            $noff_log='succeeded!';
+        }
+        else{
+            $noff_log='failed!';
+        }
+    }else{
+        $noff_log='failed!';
+    }
+}
+add_action('publish_post', 'bdping');
+// 快速输入表格
+// add_shortcode( 'table', 'wpjam_table_shortcode_handler' );
+// function wpjam_table_shortcode_handler( $atts, $content='' ) {
+//    extract( shortcode_atts( array(
+//        'border'        => '1',
+//        'cellpading'    => '0',
+//        'cellspacing'   => '0',
+//        'width'         => ''
+//    ), $atts ) );
+
+//    $output = '';
+
+//    $trs = explode("\r\n\r\n", $content);
+
+//     foreach($trs as $tr){
+//         $tr = trim($tr);
+
+//         if($tr){
+//             $tds = explode("\r\n", $tr);
+//             $output .= '<tr>';
+//             foreach($tds as $td){
+//                 $td = trim($td);
+//                 if($td){
+//                     $output .= '<td>'.$td.'</td>';
+//                 }
+//             }
+//             $output .= '</tr>';
+//         }
+//     }
+
+//     if($class){
+//         $class = ' class="'.$class.'"';
+//     }
+
+//     if($width){
+//         $width = ' width="'.$width.'"';
+//     }
+
+//     $output = '<table border="'.$border.'" cellpading="'.$cellpading.'" cellspacing="'.$cellspacing.'" '.$width.' '.$class.' >'.$output.'</table>';
+
+//     return $output;
+// }
+//该首页摘要字数
+function new_excerpt_length($length)
+{
+  return 200;
+}
+add_filter('excerpt_length', 'new_excerpt_length');
+//增强搜索相关性
+add_filter('posts_orderby_request', 'wpjam_search_orderby_filter');
+function wpjam_search_orderby_filter($orderby = ''){
+  if(is_search()){
+    global $wpdb;
+    $keyword = $wpdb->prepare($_REQUEST['s'],'');
+    return "((CASE WHEN {$wpdb->posts}.post_title LIKE '%{$keyword}%' THEN 2 ELSE 0 END) + (CASE WHEN {$wpdb->posts}.post_content LIKE '%{$keyword}%' THEN 1 ELSE 0 END)) DESC, {$wpdb->posts}.post_modified DESC, {$wpdb->posts}.ID ASC";
+  }else{
+    return $orderby;
+  }
+}
+//文章页面添加摘要
+add_action( 'admin_menu', 'my_page_excerpt_meta_box' );
+ 
+function my_page_excerpt_meta_box() {
+    add_meta_box( 'postexcerpt', __('Excerpt'), 'post_excerpt_meta_box', 'page', 'normal', 'core' );
+}
+//查询数据库次数
+//add_action( 'wp_footer', 'wpjam_page_speed' );
+//function wpjam_page_speed() {
+//  date_default_timezone_set( get_option( 'timezone_string' ) );
+//  $content  = '[ ' . date( 'Y-m-d H:i:s T' ) . ' ] ';
+//  $content .= '页面生成时间 ';
+//  $content .= timer_stop( $display = 0, $precision = 2 );
+//  $content .= ' 查询 ';
+//  $content .= get_num_queries();
+//  $content .= ' 次';
+//  if( ! current_user_can( 'administrator' ) ) $content = "<!-- $content -->";
+//  echo $content;
+//}
 //去谷歌字体
 function remove_open_sans() {
 wp_deregister_style( 'open-sans' );
@@ -420,6 +512,18 @@ wp_register_style( 'open-sans', false );
 wp_enqueue_style('open-sans','');
 }
 add_action( 'init', 'remove_open_sans' );
+//添加版权
+function feed_copyright($content) {
+if(is_single() or is_feed()) {
+$content.= "<blockquote>";
+$content.= '<div>转载请注明：<a title="www.rccoder.net|若兮为尘" href="http://www.rccoder.net">www.rccoder.net|若兮为尘</a></div>';
+//$content.= '<div> 　» 转载请注明：<a title="楚狂人博客" href="http://www.chukuangren.com">楚狂人博客</a> » <a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">《'.get_the_title().'》</a></div>';
+//$content.= '<div>　» 本文链接地址：<a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">'.get_permalink().'</a></div>';
+$content.= "</blockquote>";
+}
+return $content;
+}
+add_filter ('the_content', 'feed_copyright');
 //lianjie
 add_filter( 'pre_option_link_manager_enabled', '__return_true' ); 
 ?>
