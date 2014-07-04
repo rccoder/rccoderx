@@ -15,12 +15,14 @@
 				}
 			}
 			$post_tag = $tag_list[ rand(0, count($tag_list) - 1) ];
-			$query_posts = new WP_Query('orderby=rand&caller_get_posts=1&showposts=4&tag_in='.$post_tag);
+			$query_posts = new WP_Query('orderby=rand&caller_get_posts=1&showposts=20&tag_in='.$post_tag);
 		?>
 		<?php if($query_posts->have_posts()):while($query_posts->have_posts()):$query_posts->the_post(); ?>
 		<dl>
 			<dt><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></dt>
-			<dd>Posted on <?php the_time('m月d日'); ?></dd>
+			<dd>
+			<br />
+			</dd>
 		</dl>
 		<?php endwhile; endif; ?>
 	</div>
