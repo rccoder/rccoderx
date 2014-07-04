@@ -8,6 +8,7 @@
 <![endif]-->
 	<head>
 	<?php wp_head();?>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />	
 	<link rel="shortcut icon" type="image/x-icon" href="<?php bloginfo( 'template_url' ); ?>/images/favicon.ico" />
 	<!--KEY-->
@@ -84,6 +85,22 @@
 	?>
 	<div class="cc"></div>
 </div></div>
+<!-- 关于博主 -->
+<div class="qaq">
+	<a class="cd">关于博主</a>
+  	<div class="icon-direction-outline">
+	</div>
+	<div class="dropdown">
+	 宅</br>
+	 HIT</br>
+	 准大二</br>
+	 喜欢WEB</br>
+	 自命清高</br>
+	 单身直男</br>
+	 计算机科学与技术</br>
+	    www.rccoder.net
+	 </div>
+</div>
 <div id="modienav">
 	<?php if(is_single()): ?>
 		<?php the_title(); ?>

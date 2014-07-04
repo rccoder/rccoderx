@@ -131,3 +131,9 @@ jQuery.fn.extend({
         });
     }  
 });
+
+$(function(){
+  $(".cd").click(function(){
+    $(".dropdown").toggleClass("active");
+  });
+});
