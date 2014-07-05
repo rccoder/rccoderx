@@ -577,3 +577,48 @@ pointer-events: auto;
 -o-transform: translateY(0) scale(1);
 transform: translateY(0) scale(1);
 }
+/************************************************
+*多说自定义表情
+************************************************/
+.btn-select {
+    position: absolute;
+    display: inline-block;
+    width: 150px;
+    height: 25px;
+    font: 14px/20px "Microsoft YaHei";
+    color: #4B4B4B;
+    margin-top: -143px;
+    margin-left: 400px;
+    z-index:999;
+}
+     
+.btn-select .cur-select {
+    position: absolute;
+    display: block;
+    width: 200px;
+    height: 25px;
+    line-height: 25px;
+    text-indent: 10px;
+    z-index:999;
+border: 2px dashed yellow;
+border-radius: 5px;
+}  
+.btn-select select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 25px;
+    opacity: 0;
+    filter: alpha(opacity: 0;);
+    font: 14px/20px "Microsoft YaHei";
+    color: #f80;
+}
+     
+.btn-select select option {
+    text-indent: 10px;
+}
+#emotion {
+        position: absolute;
+        z-index: 999;
+}
