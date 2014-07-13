@@ -512,6 +512,11 @@ wp_register_style( 'open-sans', false );
 wp_enqueue_style('open-sans','');
 }
 add_action( 'init', 'remove_open_sans' );
+/*移除版本*/
+function remove_wordpress_version() {
+ return ''; 
+ } 
+ add_filter('the_generator', 'remove_wordpress_version');
 //添加版权
 function feed_copyright($content) {
 if(is_single() or is_feed()) {
