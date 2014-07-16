@@ -39,7 +39,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 		<a href="http://www.rccoder.net/sitemap">站点地图</a>
 		
-本站由<a href="http://host.2siga.net/" rel="nofollow">SIGA主机</a>和<a href="http://www.qiniu.com" rel="nofollow">七牛云储存</a>赞助
+本站由<a href="http://my.jsdl.cc/aff.php?aff=023" rel="nofollow">极速动力主机</a>和<a href="http://www.qiniu.com" rel="nofollow">七牛云储存</a>赞助
 本站永久链接<a href="http://www.rccoder.net" rel="nofollow">www.rccoder.net</a>
         All Rights Reserved.
 
