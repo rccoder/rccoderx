@@ -531,4 +531,15 @@ return $content;
 add_filter ('the_content', 'feed_copyright');
 //lianjie
 add_filter( 'pre_option_link_manager_enabled', '__return_true' ); 
+/*搜索关键字高亮*/
+function wps_highlight_results($text){
+if(is_search()){
+$sr = get_query_var('s');
+$keys = explode(" ",$sr);
+$text = preg_replace('/('.implode('|', $keys) .')/iu', '<stronglight>'.$sr.'</stronglight>', $text);//设置突出关键字样式
+}
+return $text;
+}
+add_filter('the_excerpt', 'wps_highlight_results');
+add_filter('the_title', 'wps_highlight_results');
 ?>
