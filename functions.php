@@ -542,4 +542,22 @@ return $text;
 }
 add_filter('the_excerpt', 'wps_highlight_results');
 add_filter('the_title', 'wps_highlight_results');
+/*增强后台编辑*/
+function add_more_buttons($buttons) {
+$buttons[] = 'fontsizeselect';
+$buttons[] = 'styleselect';
+$buttons[] = 'fontselect';
+$buttons[] = 'hr';
+$buttons[] = 'sub';
+$buttons[] = 'sup';
+$buttons[] = 'cleanup';
+$buttons[] = 'image';
+$buttons[] = 'code';
+$buttons[] = 'media';
+$buttons[] = 'backcolor';
+$buttons[] = 'visualaid';
+return $buttons;
+}
+add_filter("mce_buttons_3", "add_more_buttons");
+
 ?>
