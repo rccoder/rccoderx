@@ -559,5 +559,22 @@ $buttons[] = 'visualaid';
 return $buttons;
 }
 add_filter("mce_buttons_3", "add_more_buttons");
-
+//随机显示后台配色
+function Rccoder_random_admin_color(){
+  static $color;
+  if( isset( $color ) ) return $color;
+  $color = array_keys( $GLOBALS['_wp_admin_css_colors'] );
+  $color = $color[array_rand( $color )];
+  return $color;
+}
+add_filter( 'get_user_option_admin_color', 'Rccoder_random_admin_color' );
+//防止垃圾评论，设定评论最短字符
+function Rccoder_minimal_comment_length( $commentdata ){
+  $minlength = 20;//评论最少字数
+  preg_match_all( '/./u', trim( $commentdata['comment_content'] ), $maxlength );
+  $maxlength = count( $maxlength[0] );
+  if( $maxlength < $minlength ) wp_die( '亲！评论最少需要 ' . $minlength . ' 字~' );
+  return $commentdata;
+}
+add_filter( 'preprocess_comment', 'Rccoder_minimal_comment_length', 8 );
 ?>
