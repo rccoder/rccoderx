@@ -35,11 +35,6 @@
 					echo '<div class="Rcloud_signleBot_ad"><center>'.dopt('Rcloud_signleTop_ad').'</center></div>';
 				}
 			?>
-			<div class="single-copyright">
-				<div class="fl">本站遵循CC协议<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">署名-非商业性使用-相同方式共享 </a></div>
-				<div class="fr">转载请注明来自：<a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a></div>
-				<div class="cc"></div>
-			</div>
 		</div>
 		<div class="part">
 			<ul class="otherPost">

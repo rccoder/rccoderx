@@ -521,7 +521,8 @@ function remove_wordpress_version() {
 function feed_copyright($content) {
 if(is_single() or is_feed()) {
 $content.= "<blockquote>";
-$content.= '<div>转载请注明：<a title="www.rccoder.net|若兮为尘" href="http://www.rccoder.net">www.rccoder.net|若兮为尘</a></div>';
+$content.= '<div>转载请注明：<a title="www.rccoder.net|若兮为尘" href="http://www.rccoder.net">www.rccoder.net|若兮为尘</a><br />
+如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~</div>';
 //$content.= '<div> 　» 转载请注明：<a title="楚狂人博客" href="http://www.chukuangren.com">楚狂人博客</a> » <a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">《'.get_the_title().'》</a></div>';
 //$content.= '<div>　» 本文链接地址：<a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">'.get_permalink().'</a></div>';
 $content.= "</blockquote>";
