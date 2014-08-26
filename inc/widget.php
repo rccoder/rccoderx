@@ -17,6 +17,7 @@ class hotTag extends WP_Widget {
         ?>
               <?php echo $before_widget; ?>
 				<h3 class="widget-title"><?php echo  $instance['title']; ?></h3>
+                <div class="widget-line"></div>
                 <div class="hotTag"><?php wp_tag_cloud('smallest=12&largest=12&unit=px&number='.$instance['Num'].'&orderby=count&order=DESC'); ?></div>
               <?php echo $after_widget; ?>
         <?php
@@ -58,6 +59,7 @@ class randPost extends WP_Widget {
         ?>
 <?php echo $before_widget; ?>
 <h3 class="widget-title"><?php echo  $instance['title']; ?></h3>
+<div class="widget-line"></div>
 <ul class="randPost">
 <?php
 $args = array('orderby' => 'rand', 'post__not_in' => array($post->ID), 'showposts' => $instance['Num'],'caller_get_posts'=>1);
@@ -108,6 +110,7 @@ class thisCategory extends WP_Widget {
         ?>
 <?php echo $before_widget; ?>
 <h3 class="widget-title"><?php echo  $instance['title']; ?></h3>
+<div class="widget-line"></div>
 <ul class="catPost">
 <?php
 $query_posts = new WP_Query('caller_get_posts=1&showposts='.$instance['Num'].'&cat='.$instance['cat']);
@@ -168,6 +171,7 @@ class relevance extends WP_Widget {
         ?>
 <?php echo $before_widget; ?>
 <h3 class="widget-title"><?php echo  $instance['title']; ?></h3>
+<div class="widget-line"></div>
 <ul class="catPost">
 <?php
 $post_tags = wp_get_post_tags($post->ID);
@@ -334,6 +338,7 @@ class widget_tongji extends WP_Widget {
 		$time = empty($instance['time']) ? '建站日期' : apply_filters('widget_count', $instance['time']);
 
 		echo $before_title . $title . $after_title;
+        echo '<div class="widget-line"></div>';
 		echo '<ul class="tongji">';?>
 			<li>文章总数：<?php $count_posts = wp_count_posts();echo $published_posts = $count_posts->publish;?>篇</li>
             <li>评论总数：<?php $count_comments = get_comment_count();echo $count_comments['approved'];?>条</li>

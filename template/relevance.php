@@ -5,6 +5,7 @@
 		<div class="fr"><?php include_once 'fenxiang.php'; ?></div>
 		<div class="cc"></div>
 	</h3>
+	<div class="single-line"></div>
 	<div class="single-relevance-list">
 		<?php
 			$post_tags = wp_get_post_tags($post->ID);

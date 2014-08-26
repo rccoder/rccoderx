@@ -10,6 +10,8 @@
 	<?php wp_head();?>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Page-Enter" Content="revealTrans(duration=5, transition=12)">
+	<meta http-equiv="Page-Exit" Content="revealTrans(duration=5, transition=12)">
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />	
 	<link rel="shortcut icon" type="image/x-icon" href="<?php bloginfo( 'template_url' ); ?>/images/favicon.ico" />
 	<!--KEY-->
@@ -20,7 +22,7 @@
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
-<body>
+<body onload="prettyPrint()">
     <div id="circle-box">
     <div id="circle"></div>
     <div id="circle1"></div>
@@ -67,6 +69,7 @@
 	</div>
 	<div class="cc"></div>
 </div></div>
+<div id="nav-background">
 <div id="nav"><div class="wrap">
 	<!-- 导航左 -->
 	<?php 
@@ -86,6 +89,7 @@
 	?>
 	<div class="cc"></div>
 </div></div>
+</div>
 <!-- 关于博主 -->
 <div class="qaq">
 	<a class="cd">关于博主</a>

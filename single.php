@@ -12,6 +12,7 @@
 				<span>分类：<?php the_category(' '); ?></span>
 				<span>评论：<?php comments_popup_link('0条', '1 条', '% 条', '', '评论已关闭'); ?></span>
 				<span>浏览：<?php the_view(); ?></span>
+				<div class="single-line"></div>
 				<?php if( current_user_can( 'manage_options' ) ) { ?>
 				<a href="<?php echo get_edit_post_link(); ?>" target="_blank">编辑文章</a>
 				<?php } ?>
@@ -26,6 +27,20 @@
 				?>
 				<?php include_once 'template/media.php'; ?>
 				<?php the_content(); ?>
+				<?php
+					$from_name =get_post_meta($post->ID, "from_name_value", true);
+					$from_link =get_post_meta($post->ID, "from_link_value", true);
+					if(empty($from_name)){
+					}
+					if(empty($from_link)){
+						}
+					echo "本文来源于:".'<a rel="nofollow" href="'.$from_link.'">'.$from_name.'.</a>.<br />'; ?>
+				<blockquote>
+				<div >
+				转载请注明：<a href="http://www.rccoder.net/sitemap">www.rccoder.net|若兮为尘</a><br />
+				如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~
+				</div>
+				</blockquote>
 			</div>
 			<div class="single-tags">标签：<?php the_tags('',' '); ?></div>
 		<?php endwhile; endif; ?>

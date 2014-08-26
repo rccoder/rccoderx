@@ -15,6 +15,7 @@
 		<span class="fr"><?php the_time('m月d日'); ?></span>
 		<div class="cc"></div>
 	</h2>
+	<div class="post-list-style"></div>
 	<div class="post-list-text"><?php the_excerpt(); ?></div>
 	<ul class="post-list-info">
 		<li>分类：<?php the_category(' '); ?></li>
@@ -73,6 +74,7 @@
         <a class="fl" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><em><?php $t1=$post->post_date; $t2=date("Y-m-d H:i:s"); $diff=(strtotime($t2)-strtotime($t1))/3600; if($diff<72){echo "【 New!】";}?><?php if ( is_sticky() ) {echo "【置顶】";}?></em><?php the_title(); ?></a>
 		<span class="fr"><?php the_time('m月d日'); ?></span>
 		<div class="cc"></div>
+		<div class="line"></div>
 	</h2>
 	<?php if(get_the_img()){
 		echo '<div class="post-list-img"><a href="'.get_permalink().'" title="'.get_the_title().'">';
