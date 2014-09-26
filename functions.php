@@ -518,16 +518,18 @@ function remove_wordpress_version() {
  } 
  add_filter('the_generator', 'remove_wordpress_version');
 //添加版权
-//function feed_copyright($content) {
-//if(is_single() or is_feed()) {
-//$content.= "<blockquote>";
-//$content.= '<div>转载请注明：<a href="http://www.rccoder.net/sitemap">www.rccoder.net|若兮为尘</a><br />
-//如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~</div>';
-//$content.= "</blockquote>";
-//}
-//return $content;
-//}
-//add_filter ('the_content', 'feed_copyright');
+function feed_copyright($content) {
+if(is_single() or is_feed()) {
+$content.= "<blockquote>";
+$content.= '<div>转载请注明：<a href="http://www.rccoder.net/sitemap">www.rccoder.net|若兮为尘</a><br />
+如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~</div>';
+//$content.= '<div> 　» 转载请注明：<a title="楚狂人博客" href="http://www.chukuangren.com">楚狂人博客</a> » <a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">《'.get_the_title().'》</a></div>';
+//$content.= '<div>　» 本文链接地址：<a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">'.get_permalink().'</a></div>';
+$content.= "</blockquote>";
+}
+return $content;
+}
+add_filter ('the_content', 'feed_copyright');
 //lianjie
 add_filter( 'pre_option_link_manager_enabled', '__return_true' ); 
 /*搜索关键字高亮*/
@@ -590,71 +592,4 @@ function Rccoder_admin_lettering(){
         </style>';
 }
 add_action('admin_head', 'Rccoder_admin_lettering');
-//添加转载文章地址
-$new_meta_boxes =
-array(
-    "from_name" => array(
-        "name" => "from_name",
-        "std" => "本站",
-        "title" => "来源站点:"),
-
-    "from_link" => array(
-        "name" => "from_link",
-        "std" =>  "",
-        "title" => "来源链接:")
-);
-
-function new_meta_boxes() {
-    global $post, $new_meta_boxes;
-
-    foreach($new_meta_boxes as $meta_box) {
-        $meta_box_value = get_post_meta($post->ID, $meta_box['name'].'_value', true);
-
-        if($meta_box_value == "")
-            $meta_box_value = $meta_box['std'];
-
-        echo'<input type="hidden" name="'.$meta_box['name'].'_noncename" id="'.$meta_box['name'].'_noncename" value="'.wp_create_nonce( plugin_basename(__FILE__) ).'" />';
-
-        echo'<h4>'.$meta_box['3'].'</h4>';
-
-        echo '<textarea cols="60" rows="1" name="'.$meta_box['name'].'_value">'.$meta_box_value.'</textarea><br />';
-    }
-}
-function create_meta_box() {
-    global $theme_name;
-
-    if ( function_exists('add_meta_box') ) {
-        add_meta_box( 'new-meta-boxes', '设置文章来源', 'new_meta_boxes', 'post', 'normal', 'high' );
-    }
-}
-function save_postdata( $post_id ) {
-    global $post, $new_meta_boxes;
-
-    foreach($new_meta_boxes as $meta_box) {
-        if ( !wp_verify_nonce( $_POST[$meta_box['name'].'_noncename'], plugin_basename(__FILE__) ))  {
-            return $post_id;
-        }
-
-        if ( 'page' == $_POST['post_type'] ) {
-            if ( !current_user_can( 'edit_page', $post_id ))
-                return $post_id;
-        } 
-        else {
-            if ( !current_user_can( 'edit_post', $post_id ))
-                return $post_id;
-        }
-
-        $data = $_POST[$meta_box['name'].'_value'];
-
-        if(get_post_meta($post_id, $meta_box['name'].'_value') == "")
-            add_post_meta($post_id, $meta_box['name'].'_value', $data, true);
-        elseif($data != get_post_meta($post_id, $meta_box['name'].'_value', true))
-            update_post_meta($post_id, $meta_box['name'].'_value', $data);
-        elseif($data == "")
-            delete_post_meta($post_id, $meta_box['name'].'_value', get_post_meta($post_id, $meta_box['name'].'_value', true));
-    }
-}
-
-add_action('admin_menu', 'create_meta_box');
-add_action('save_post', 'save_postdata');
 ?>

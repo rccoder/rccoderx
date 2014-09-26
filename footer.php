@@ -3,12 +3,8 @@
 <div id="footer"><div class="wrap">
 
 	<!-- 底部菜单 -->
-	<div class="footmenu">
-	本站导航:
-	</div>
 
 	<?php 
-		
 
 		$args = array(
 
@@ -19,6 +15,7 @@
 			"depth" => "1"
 
 		);
+
 		wp_nav_menu($args); 
 
 	?>
