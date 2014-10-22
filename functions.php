@@ -518,18 +518,18 @@ function remove_wordpress_version() {
  } 
  add_filter('the_generator', 'remove_wordpress_version');
 //添加版权
-function feed_copyright($content) {
-if(is_single() or is_feed()) {
-$content.= "<blockquote>";
-$content.= '<div>转载请注明：<a href="http://www.rccoder.net/sitemap">www.rccoder.net|若兮为尘</a><br />
-如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~</div>';
+//function feed_copyright($content) {
+//if(is_single() or is_feed()) {
+//$content.= "<blockquote>";
+//$content.= '<div>转载请注明：<a href="http://www.rccoder.net/sitemap">www.rccoder.net|若兮为尘</a><br />
+//如果你喜欢本文，或者感觉本文对你有帮助，就点击下面的分享按钮，把这篇文章分享出去吧~</div>';
 //$content.= '<div> 　» 转载请注明：<a title="楚狂人博客" href="http://www.chukuangren.com">楚狂人博客</a> » <a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">《'.get_the_title().'》</a></div>';
 //$content.= '<div>　» 本文链接地址：<a rel="bookmark" title="'.get_the_title().'" href="'.get_permalink().'">'.get_permalink().'</a></div>';
-$content.= "</blockquote>";
-}
-return $content;
-}
-add_filter ('the_content', 'feed_copyright');
+//$content.= "</blockquote>";
+//}
+//return $content;
+//}
+//add_filter ('the_content', 'feed_copyright');
 //lianjie
 add_filter( 'pre_option_link_manager_enabled', '__return_true' ); 
 /*搜索关键字高亮*/
@@ -570,14 +570,14 @@ function Rccoder_random_admin_color(){
 }
 add_filter( 'get_user_option_admin_color', 'Rccoder_random_admin_color' );
 //防止垃圾评论，设定评论最短字符
-function Rccoder_minimal_comment_length( $commentdata ){
-  $minlength = 20;//评论最少字数
-  preg_match_all( '/./u', trim( $commentdata['comment_content'] ), $maxlength );
-  $maxlength = count( $maxlength[0] );
-  if( $maxlength < $minlength ) wp_die( '亲！评论最少需要 ' . $minlength . ' 字~' );
-  return $commentdata;
-}
-add_filter( 'preprocess_comment', 'Rccoder_minimal_comment_length', 8 );
+//function Rccoder_minimal_comment_length( $commentdata ){
+//  $minlength = 20;//评论最少字数
+//  preg_match_all( '/./u', trim( $commentdata['comment_content'] ), $maxlength );
+//  $maxlength = count( $maxlength[0] );
+//  if( $maxlength < $minlength ) wp_die( '亲！评论最少需要 ' . $minlength . ' 字~' );
+//  return $commentdata;
+//}
+//add_filter( 'preprocess_comment', 'Rccoder_minimal_comment_length', 8 );
 // 更改后台字体为微软雅黑
 function Rccoder_admin_lettering(){
     echo'<style type="text/css">
@@ -793,5 +793,4 @@ function tag_link($content){
 
 
 }
-
 ?>
