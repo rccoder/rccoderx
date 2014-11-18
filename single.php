@@ -51,7 +51,7 @@
 			<div class="single-line"></div>
 			<div id="wumiiDisplayDiv" style="text-align:center; margin-left:10%"></div>
 		</div>
-		<?php include_once 'template/relevance.php'; ?>
+		<?php include_once 'template/relevance.php'; ?>		
 		<!-- 评论 -->
 		<div class="part"><?php comments_template(); ?></div>
 	</div>
