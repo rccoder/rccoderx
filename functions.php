@@ -644,12 +644,14 @@ function tag_link($content){
 	return $content;
 }
 //GRAVER
-function v7v3_get_avatar($avatar) {
-    $avatar = str_replace(array("www.gravatar.com","0.gravatar.com","1.gravatar.com","2.gravatar.com"),
-"gravatar.duoshuo.com",$avatar);
-    return $avatar;
+function dmeng_get_https_avatar($avatar) {
+  //~ 替换为 https 的域名
+  $avatar = str_replace(array("www.gravatar.com", "0.gravatar.com", "1.gravatar.com", "2.gravatar.com"), "secure.gravatar.com", $avatar);
+  //~ 替换为 https 协议
+  $avatar = str_replace("http", "https", $avatar);
+  return $avatar;
 }
-add_filter( 'get_avatar', 'v7v3_get_avatar', 10, 3 );
+add_filter('get_avatar', 'dmeng_get_https_avatar');
 //no ping-back
 function no_self_ping( &$links ) {
     $home = get_option( 'home' );
@@ -657,4 +659,16 @@ function no_self_ping( &$links ) {
         if ( 0 === strpos( $link, $home ) ) unset($links[$l]);
 }
 add_action( 'pre_ping', 'no_self_ping' );
+function v7v3_referer(){
+echo "<script>
+window.onload=function(){
+  var a = document.getElementsByTagName('a');
+  for(var i=0;i<a.length;i++) a[i].onclick = function(){
+    if(this.href.indexOf('javascript:;')==-1 && this.href.indexOf('".$_SERVER['HTTP_HOST']."')==-1)
+    this.href='".get_bloginfo('url')."'wp-content/themes/rccoder/referer.php?go=' + encodeURIComponent(this.href) + '&referer=' + window.location.href;
+    }
+}
+</script>";
+}
+add_action( 'wp_head', 'v7v3_referer' );
 ?>
