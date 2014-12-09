@@ -671,4 +671,27 @@ window.onload=function(){
 </script>";
 }
 add_action( 'wp_head', 'v7v3_referer' );
+//图片添加alt属性
+function image_alt( $imgalt ){
+        global $post;
+        $title = $post->post_title;
+        $imgUrl = "<img\s[^>]*src=(\"??)([^\" >]*?)\\1[^>]*>";
+        if(preg_match_all("/$imgUrl/siU",$imgalt,$matches,PREG_SET_ORDER)){
+                if( !empty($matches) ){
+                        for ($i=0; $i < count($matches); $i++){
+                                $tag = $url = $matches[$i][0];
+                                $judge = '/alt=/';
+                                preg_match($judge,$tag,$match,PREG_OFFSET_CAPTURE);
+                                if( count($match) < 1 )
+                                $altURL = ' alt="'.$title.'" ';
+                                $url = rtrim($url,'>');
+                                $url .= $altURL.'>';
+                                $imgalt = str_replace($tag,$url,$imgalt);
+                        }
+                }
+        }
+        return $imgalt;
+}
+
+add_filter( 'the_content','image_alt');
 ?>
